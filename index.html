@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html id="html-tag" lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeqTeq Resort | پڕۆژەی تەقتەق</title>
+    <style>
+        :root { 
+            --gold: #ffb700; 
+            --dark-bg: #0b0d11; 
+            --card-bg: #161a23; 
+            --text-gray: #a0a0a0;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        body, html { 
+            margin: 0; padding: 0; min-height: 100vh; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--dark-bg); color: var(--white); 
+            scroll-behavior: smooth; overflow-x: hidden;
+        }
+
+        .page { display: none; min-height: 100vh; width: 100%; transition: 0.5s; }
+        .active { display: block; animation: slideUp 0.6s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero { 
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('bridge.jpg');
+            background-size: cover; background-position: center;
+        }
+        .welcome-box { 
+            text-align: center; background: rgba(255,255,255,0.05); 
+            padding: 40px; border-radius: 30px; backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--shadow);
+        }
+
+        .btn-main {
+            padding: 15px 40px; margin: 10px; border: none; border-radius: 50px;
+            font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-gold { background: var(--gold); color: #000; box-shadow: 0 5px 15px rgba(255, 183, 0, 0.3); }
+        .btn-gold:hover { transform: scale(1.05); background: #ffa600; }
+
+        input { 
+            width: 100%; padding: 15px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05); color: white; font-size: 16px; outline: none;
+            box-sizing: border-box; transition: 0.3s;
+        }
+        input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+
+        .header { 
+            padding: 40px 20px; text-align: center; 
+            background: linear-gradient(to bottom, #1a1e26, var(--dark-bg));
+        }
+        .grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+            gap: 20px; padding: 20px; max-width: 1000px; margin: 0 auto;
+        }
+        
+        .card { 
+            background: var(--card-bg); border-radius: 25px; padding: 0;
+            text-align: center; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+        .card img { width: 100%; height: 120px; object-fit: cover; border-bottom: 2px solid var(--gold); }
+        .card h3 { padding: 10px; margin: 0; font-size: 16px; }
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); }
+
+        /* ستایلی بەشە کاڵەکان */
+        .coming-soon { opacity: 0.4; filter: grayscale(80%); cursor: not-allowed; }
+        .coming-soon:hover { transform: none; border-color: rgba(255,255,255,0.1); }
+
+        .list-item { 
+            background: var(--card-bg); margin: 15px auto; padding: 15px; border-radius: 20px; 
+            display: flex; align-items: center; gap: 15px; max-width: 500px; cursor: pointer; 
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .list-item:hover { border-color: var(--gold); transform: scale(1.02); }
+        .list-item img { width: 70px; height: 70px; border-radius: 15px; object-fit: cover; }
+
+        .detail-img-container { position: relative; width: 100%; height: 250px; border-radius: 0 0 40px 40px; overflow: hidden; }
+        .detail-img { width: 100%; height: 100%; object-fit: cover; }.info-card { 
+            background: var(--card-bg); border-radius: 30px; padding: 25px;
+            box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.05);
+            margin: -40px 20px 20px 20px; position: relative; z-index: 2;
+        }
+        .price-badge { 
+            display: inline-block; background: var(--gold); color: black; 
+            padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 20px;
+        }
+        select {
+            width: 100%; padding: 15px; border-radius: 15px; background: #0b0d11;
+            color: white; border: 1px solid var(--gold); margin: 15px 0; outline: none;
+        }
+
+        .wa-btn {
+            background: #25D366; color: white; padding: 18px; border-radius: 20px;
+            text-decoration: none; display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 18px; margin-top: 20px; gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lang-page" class="page active">
+        <div class="hero">
+            <div class="welcome-box">
+                <h1 id="txt-welcome">پڕۆژەی گەشتیاری تەقتەق</h1>
+                <button class="btn-main btn-gold" onclick="setLang('ku')">کوردی</button>
+                <button class="btn-main btn-gold" onclick="setLang('ar')">العربية</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="login-page" class="page">
+        <div class="hero">
+            <div class="welcome-box" style="width: 320px;">
+                <h2 id="txt-login-title">بەخێربێیت</h2>
+                <input type="text" id="username" placeholder="ناوەکەت بنووسە...">
+                <br><br>
+                <button class="btn-main btn-gold" style="width: 100%;" id="txt-login-btn" onclick="goMenu()">چوونە ژوورەوە</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="menu-page" class="page">
+        <div class="header">
+            <h1 style="color: var(--gold); margin: 0; font-size: 24px;" id="txt-main-title">بەخێرهاتی بۆ تەقتقی گەشتیاری</h1>
+            <p id="welcome-msg" style="color: var(--text-gray); margin-top: 10px;"></p>
+        </div>
+        <div class="grid" id="grid-items"></div>
+    </div>
+
+    <div id="farm-list-page" class="page">
+        <div class="header">
+            <button onclick="goBack()" style="float: right; background: none; border: none; color: white; font-size: 25px; cursor: pointer;">⬅️</button>
+            <h2 style="color: var(--gold);">هەڵبژاردنی مەزرەعە</h2>
+        </div>
+        <div style="padding: 10px;">
+            <div class="list-item" onclick="openDetail('farm', 'باخی گەشتیاری مەیلی', 'farm1.jpg')">
+                <img src="farm1.jpg">
+                <div><h4>باخی مەیلی</h4><p style="font-size: 12px; color: var(--text-gray);">ئارامی و سروشت</p></div>
+            </div>
+            <div class="list-item" onclick="openDetail('farm', 'ڤێلای شاهانە', 'farm2.jpg')">
+                <img src="farm2.jpg">
+                <div><h4>ڤێلای شاهانە</h4><p style="font-size: 12px; color: var(--text-gray);">مەلەوانگەی مۆدێرن</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sub-page" class="page">
+        <div class="detail-img-container">
+            <button id="btn-back-detail" onclick="goBackFromDetail()" style="position:absolute; top:20px; right:20px; z-index:10; background:rgba(0,0,0,0.6); color:white; border:none; padding:10px 15px; border-radius:50px; cursor:pointer;">گەڕانەوە ⬅️</button>
+            <img id="sub-img" class="detail-img" src="">
+        </div>
+        <div class="info-card">
+            <h2 id="sub-title" style="margin:0 0 10px 0; color:var(--gold);"></h2>
+            <p id="sub-desc" style="color:var(--text-gray); line-height:1.6; font-size: 14px;"></p>
+            
+            <div style="margin: 20px 0;">
+                <span id="txt-price-label" style="font-size:13px; color:var(--text-gray);">نرخی دیاریکراو:</span><br>
+                <div class="price-badge" id="sub-price"></div>
+            </div><label id="txt-type-label" style="font-weight:bold; font-size: 14px;"></label>
+            <select id="item-options" onchange="updatePrice()"></select>
+            
+            <a href="#" class="wa-btn" id="wa-link" onclick="sendBooking()">
+                <span id="txt-wa-btn">حجزکردن لە واتسئەپ</span> 💬
+            </a>
+        </div>
+    </div>
+
+    <script>
+        var currentLang = 'ku';
+        var userName = "";
+        var selectedKey = "";
+        var selectedSubName = "";
+
+        var pricing = {
+            farm: [ {n: "خانووی ڕۆژانە", p: "٨٠,٠٠٠", ar: "بيت استراحة نهاري"}, {n: "مانەوەی شەو", p: "١٥٠,٠٠٠", ar: "مبيت ليلة كاملة"} ]
+        };
+
+        var translations = {
+            ku: {
+                welcome: "بەخێربێن بۆ پڕۆژەی تەقتەق", loginTitle: "تۆمارکردنی ناو", loginBtn: "چوونە ژوورەوە",
+                mainTitle: "بەخێرهاتی بۆ تەقتقی گەشتیاری", back: "گەڕانەوە", typeLabel: "جۆری مەبەست هەڵبژێرە:",
+                waBtn: "پەیوەندی و حجزکردن", priceLabel: "نرخی دیاریکراو:",
+                soon: "ئەم بەشە بەم زوانە بەردەست دەبێت",
+                services: {
+                    farm: { t: "مەزرەعە", d: "خانووی مۆدێرن و مەزرەعەی خێزانی بۆ پشوویەکی ئارام." },
+                    kepr: { t: "کەپرەکان" }, fish: { t: "ماسی زێ" }, food: { t: "چێشتخانە" },
+                    boat: { t: "گەشتی بەلەم" }, moto: { t: "ماتۆڕ سواری" }, cafe: { t: "کافتریا" }, kids: { t: "یاری مناڵان" }
+                }
+            },
+            ar: {
+                welcome: "أهلاً بكم في منتجع طقطق", loginTitle: "تسجيل الاسم", loginBtn: "دخول",
+                mainTitle: "أهلاً بكم في طقطق السياحي", back: "رجوع", typeLabel: "اختر النوع المطلوب:",
+                waBtn: "الاتصال والحجز الآن", priceLabel: "السعر المحدد:",
+                soon: "هذا القسم سيتوفر قريباً",
+                services: {
+                    farm: { t: "المزارع", d: "بيوت استراحة ومزارع عائلية حديثة لقضاء أجمل الأوقات." },
+                    kepr: { t: "الكابينات" }, fish: { t: "سمك الزاب" }, food: { t: "المطعم" },
+                    boat: { t: "جولة قارب" }, moto: { t: "الماتورات" }, cafe: { t: "كافيتريا" }, kids: { t: "ألعاب أطفال" }
+                }
+            }
+        };
+
+        function showPage(id) {
+            var pages = document.getElementsByClassName('page');
+            for (var i = 0; i < pages.length; i++) { pages[i].classList.remove('active'); }
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.getElementById('txt-welcome').innerText = translations[lang].welcome;
+            document.getElementById('txt-login-title').innerText = translations[lang].loginTitle;
+            document.getElementById('txt-login-btn').innerText = translations[lang].loginBtn;
+            showPage('login-page');
+        }
+
+        function goMenu() {
+            userName = document.getElementById('username').value;
+            if(!userName) { alert("تکایە ناوەکەت بنووسە / يرجى كتابة الاسم"); return; }
+            var msg = (currentLang === 'ku' ? "بەخێرهاتی، " : "أهلاً بك، ") + userName;
+            document.getElementById('welcome-msg').innerText = msg;
+            document.getElementById('txt-main-title').innerText = translations[currentLang].mainTitle;
+            
+            var grid = document.getElementById('grid-items');
+            grid.innerHTML = "";
+            var services = translations[currentLang].services;
+            
+            for (var key in services) {
+                var s = services[key];
+                if (key === 'farm') {
+                    grid.innerHTML += '<div class="card" onclick="showPage(\'farm-list-page\')"><img src="farm.jpg"><h3>' + s.t + '</h3></div>';
+                } else {
+                    grid.innerHTML += '<div class="card coming-soon" onclick="alert(\'' + translations[currentLang].soon + '\')"><img src="' + key + '.jpg"><h3>' + s.t + '</h3></div>';
+                }
+            }
+            showPage('menu-page');
+        }function openDetail(key, subName, customImg) {
+            selectedKey = key;
+            selectedSubName = subName;
+            var lang = translations[currentLang];
+            var s = lang.services[key];
+            
+            document.getElementById('sub-title').innerText = selectedSubName;
+            document.getElementById('sub-desc').innerText = s.d;
+            document.getElementById('sub-img').src = customImg;
+            document.getElementById('txt-price-label').innerText = lang.priceLabel;
+            document.getElementById('txt-type-label').innerText = lang.typeLabel;
+            document.getElementById('txt-wa-btn').innerText = lang.waBtn;
+
+            var sel = document.getElementById('item-options');
+            sel.innerHTML = "";
+            var options = pricing[key];
+            for (var i = 0; i < options.length; i++) {
+                var optName = (currentLang === 'ku') ? options[i].n : options[i].ar;
+                sel.innerHTML += '<option value="' + i + '">' + optName + '</option>';
+            }
+
+            updatePrice();
+            showPage('sub-page');
+        }
+
+        function updatePrice() {
+            var index = document.getElementById('item-options').value;
+            var price = pricing[selectedKey][index].p;
+            document.getElementById('sub-price').innerText = price + " IQD";
+        }
+
+        function sendBooking() {
+            var index = document.getElementById('item-options').value;
+            var item = pricing[selectedKey][index];
+            var type = (currentLang === 'ku') ? item.n : item.ar;
+            var msg = "👑 *داواکاری حجزکردن* 👑\n👤 کڕیار: " + userName + "\n📂 بەش: " + selectedSubName + "\n✨ جۆر: " + type + "\n💰 نرخ: " + item.p;
+            window.location.href = "https://wa.me/9647500919805?text=" + encodeURIComponent(msg);
+        }
+
+        function goBack() { showPage('menu-page'); }
+        function goBackFromDetail() { showPage('farm-list-page'); }
+    </script>
+</body>
+</html>
